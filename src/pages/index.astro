@@ -1,16 +1,45 @@
 ---
-
+import '../styles/global.css';
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta name="description" content="Your personal link-in-bio page" />
+		<title>Link in Bio</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+		<div class="max-w-md w-full">
+			<!-- Profile Section -->
+			<div class="text-center mb-8">
+				<div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
+					<span class="text-gray-600 text-2xl">👤</span>
+				</div>
+				<h1 class="text-2xl font-bold text-gray-900 mb-2">Your Name</h1>
+				<p class="text-gray-600">Your bio description goes here</p>
+			</div>
+
+			<!-- Links Section -->
+			<div class="space-y-4">
+				<a href="#" class="block w-full bg-blue-500 text-white text-center py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+					🌐 Website
+				</a>
+				<a href="#" class="block w-full bg-gray-800 text-white text-center py-3 px-4 rounded-lg hover:bg-gray-900 transition-colors">
+					💼 LinkedIn
+				</a>
+				<a href="#" class="block w-full bg-pink-500 text-white text-center py-3 px-4 rounded-lg hover:bg-pink-600 transition-colors">
+					📸 Instagram
+				</a>
+				<a href="#" class="block w-full bg-blue-400 text-white text-center py-3 px-4 rounded-lg hover:bg-blue-500 transition-colors">
+					🐦 Twitter
+				</a>
+				<a href="#" class="block w-full bg-purple-600 text-white text-center py-3 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+					📧 Email
+				</a>
+			</div>
+		</div>
 	</body>
 </html>
