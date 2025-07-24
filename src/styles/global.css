@@ -1,13 +1,63 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --color-primary: #3b82f6;
-  --color-secondary: #64748b;
-  --color-accent: #f59e0b;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Base styles */
+@layer base {
+  :root {
+    --noir-primary: #000000;
+    --noir-background: #0a0a0a;
+    --noir-surface: #1a1a1a;
+    --noir-surface-hover: #2a2a2a;
+    --noir-accent-1: #ffffff;
+    --noir-accent-2: #f0f0f0;
+    --noir-accent-3: #888888;
+    --noir-glass-overlay: rgba(0, 0, 0, 0.4);
+    --noir-glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  * {
+    border-color: var(--noir-surface-hover);
+  }
+
+  body {
+        @apply bg-noir-background text-noir-accent-1 font-noir-primary;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Edge-to-edge layout reset */
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Custom utilities for liquid-brutalism animations */
+@layer utilities {
+  /* Skeletal loading animation */
+  .skeletal-loading {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: skeletal-flow 1.5s ease-in-out infinite;
+  }
+
+  /* Glass morphing effect */
+  .glass-morph {
+    @apply backdrop-blur-glass backdrop-saturate-glass;
+    background: var(--noir-glass-overlay);
+    border: 1px solid var(--noir-glass-border);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
 }

@@ -1,0 +1,159 @@
+---
+import type { CardProps } from './types';
+
+interface Props extends CardProps {}
+
+const { content, background, loading = 'lazy', priority = false } = Astro.props;
+
+const cardId = `card-${content.platform.name.toLowerCase()}-${Date.now()}`;
+const cardClasses = [
+  'content-card',
+  'relative',
+  'aspect-[5/4]',
+  'rounded-[20px]',
+  'overflow-hidden',
+  'group',
+  'transition-all',
+  'duration-300',
+  'hover:scale-[1.02]',
+  'hover:shadow-2xl',
+  'focus-within:outline-none',
+  'focus-within:ring-2',
+  'focus-within:ring-offset-2',
+  'focus-within:ring-offset-background',
+  'focus-within:ring-primary'
+].join(' ');
+
+const backgroundStyles = {
+  ...(background.type === 'color' && { backgroundColor: background.color }),
+  ...(background.type === 'gradient' && {
+    background: `linear-gradient(${background.gradient?.direction || '135deg'}, ${background.gradient?.startColor}, ${background.gradient?.endColor})`
+  })
+};
+
+const textColors = background.textStyling?.useCustomColors 
+  ? {
+      primary: background.textStyling.primaryTextColor || '#ffffff',
+      secondary: background.textStyling.secondaryTextColor || '#ffffff'
+    }
+  : {
+      primary: '#ffffff',
+      secondary: '#ffffff'
+    };
+---
+
+<a
+  href={content.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  id={cardId}
+  class={cardClasses}
+  style={backgroundStyles}
+  data-platform={content.platform.name.toLowerCase()}
+  data-order={content.order}
+  data-published={content.published}
+>
+  <!-- Background Image -->
+  {background.type === 'image' && background.image && (
+    <div class="absolute inset-0">
+      <img
+        src={background.image.src}
+        alt={background.image.alt}
+        loading={loading}
+        fetchpriority={priority ? 'high' : 'auto'}
+        class="w-full h-full object-cover"
+        style={{
+          filter: background.image.overlay ? `brightness(${1 - (background.image.overlay.opacity || 0)})` : undefined
+        }}
+      />
+      {background.image.overlay && (
+        <div 
+          class="absolute inset-0"
+          style={{
+            backgroundColor: background.image.overlay.color,
+            opacity: background.image.overlay.opacity
+          }}
+        />
+      )}
+    </div>
+  )}
+
+  <!-- Content Container -->
+  <div class="relative z-10 p-6 h-full flex flex-col justify-between">
+    <!-- Top Section -->
+    <div>
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-2">
+          <span 
+            class="text-2xl"
+            style={{ color: content.platform.color }}
+          >
+            {content.platform.icon}
+          </span>
+          <span 
+            class="text-sm font-medium"
+            style={{ color: textColors.secondary }}
+          >
+            {content.platform.name}
+          </span>
+        </div>
+        <span 
+          class="text-xs px-2 py-1 rounded-full"
+          style={{ 
+            backgroundColor: content.platform.color + '20',
+            color: textColors.secondary 
+          }}
+        >
+          @{content.username}
+        </span>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div>
+      <h3 
+        class="text-lg font-bold mb-2 leading-tight"
+        style={{ color: textColors.primary }}
+      >
+        {content.description}
+      </h3>
+      
+      <div class="flex items-center justify-between">
+        <span 
+          class="text-sm opacity-80"
+          style={{ color: textColors.secondary }}
+        >
+          Visit {content.platform.name}
+        </span>
+        
+        <svg 
+          class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          style={{ color: textColors.secondary }}
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hover Overlay -->
+  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 pointer-events-none" />
+  
+  <!-- Focus Ring -->
+  <div class="absolute inset-0 rounded-[20px] ring-2 ring-transparent group-focus:ring-white/50 transition-all duration-300 pointer-events-none" />
+</a>
+
+<style>
+  .content-card {
+    will-change: transform;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .content-card {
+      transition: none;
+    }
+  }
+</style>

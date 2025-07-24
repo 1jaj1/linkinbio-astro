@@ -1,45 +1,160 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Your personal link-in-bio page" />
-		<title>Link in Bio</title>
-	</head>
-	<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
-		<div class="max-w-md w-full">
-			<!-- Profile Section -->
-			<div class="text-center mb-8">
-				<div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
-					<span class="text-gray-600 text-2xl">👤</span>
-				</div>
-				<h1 class="text-2xl font-bold text-gray-900 mb-2">Your Name</h1>
-				<p class="text-gray-600">Your bio description goes here</p>
-			</div>
+<Layout title="Daniel Richter - Creative Director & UX">
+  <main class="min-h-screen bg-black text-white">
+    <!-- Header Section - Edge-to-Edge Profile -->
+    <header class="w-full border-b border-gray-800">
+      <div class="flex items-start gap-4 py-8 px-4">
+        <div class="w-32 h-32 bg-gradient-to-br from-gray-700 to-gray-900 rounded-none flex-shrink-0">
+          <!-- Profile photo placeholder -->
+        </div>
+        <div class="flex-1">
+          <h1 class="text-4xl font-bold tracking-tight">DANIEL RICHTER</h1>
+          <p class="text-xl text-gray-300 mt-1">Creative Director & UX</p>
+          <p class="text-gray-400 mt-2 max-w-2xl">Professional sophistication through intentional design</p>
+        </div>
+      </div>
+    </header>
 
-			<!-- Links Section -->
-			<div class="space-y-4">
-				<a href="#" class="block w-full bg-blue-500 text-white text-center py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors">
-					🌐 Website
-				</a>
-				<a href="#" class="block w-full bg-gray-800 text-white text-center py-3 px-4 rounded-lg hover:bg-gray-900 transition-colors">
-					💼 LinkedIn
-				</a>
-				<a href="#" class="block w-full bg-pink-500 text-white text-center py-3 px-4 rounded-lg hover:bg-pink-600 transition-colors">
-					📸 Instagram
-				</a>
-				<a href="#" class="block w-full bg-blue-400 text-white text-center py-3 px-4 rounded-lg hover:bg-blue-500 transition-colors">
-					🐦 Twitter
-				</a>
-				<a href="#" class="block w-full bg-purple-600 text-white text-center py-3 px-4 rounded-lg hover:bg-purple-700 transition-colors">
-					📧 Email
-				</a>
-			</div>
-		</div>
-	</body>
-</html>
+    <!-- Universal Cards Grid - Asymmetrical Layout -->
+    <section class="w-full">
+      <div class="grid grid-cols-12 gap-1 p-1">
+        <!-- Hero Card 1 - Large -->
+        <article class="col-span-8 row-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-64">
+          <div class="card-content h-full p-6 flex flex-col justify-end">
+            <h2 class="text-2xl font-bold">Portfolio</h2>
+            <p class="text-gray-300 mt-1">Selected works & case studies</p>
+          </div>
+        </article>
+
+        <!-- Card 3 - Small -->
+        <article class="col-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-32">
+          <div class="card-content h-full p-4 flex flex-col justify-end">
+            <h3 class="text-sm font-bold">Instagram</h3>
+          </div>
+        </article>
+
+        <!-- Card 4 - Small -->
+        <article class="col-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-32">
+          <div class="card-content h-full p-4 flex flex-col justify-end">
+            <h3 class="text-sm font-bold">LinkedIn</h3>
+          </div>
+        </article>
+
+        <!-- Hero Card 2 - Large -->
+        <article class="col-span-6 bg-gradient-to-br from-gray-800 to-gray-900 min-h-48">
+          <div class="card-content h-full p-6 flex flex-col justify-end">
+            <h2 class="text-xl font-bold">Current Project</h2>
+            <p class="text-gray-300 mt-1">Latest work in progress</p>
+          </div>
+        </article>
+
+        <!-- Card 5 - Contact -->
+        <article class="col-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-32">
+          <div class="card-content h-full p-4 flex flex-col justify-end">
+            <h3 class="text-sm font-bold">Contact</h3>
+          </div>
+        </article>
+
+        <!-- Card 6 - Services -->
+        <article class="col-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-32">
+          <div class="card-content h-full p-4 flex flex-col justify-end">
+            <h3 class="text-sm font-bold">Services</h3>
+          </div>
+        </article>
+
+        <!-- Card 7 - Blog -->
+        <article class="col-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-32">
+          <div class="card-content h-full p-4 flex flex-col justify-end">
+            <h3 class="text-sm font-bold">Blog</h3>
+          </div>
+        </article>
+
+        <!-- Card 8 - Shop -->
+        <article class="col-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-32">
+          <div class="card-content h-full p-4 flex flex-col justify-end">
+            <h3 class="text-sm font-bold">Shop</h3>
+          </div>
+        </article>
+
+        <!-- Card 9 - About -->
+        <article class="col-span-2 bg-gradient-to-br from-gray-800 to-gray-900 min-h-32">
+          <div class="card-content h-full p-4 flex flex-col justify-end">
+            <h3 class="text-sm font-bold">About</h3>
+          </div>
+        </article>
+
+        <!-- Feature Card - Large -->
+        <article class="col-span-4 bg-gradient-to-br from-purple-900 to-pink-900 min-h-32">
+          <div class="card-content h-full p-6 flex flex-col justify-end">
+            <h3 class="text-lg font-bold">Call to Action</h3>
+            <p class="text-gray-300 mt-1">Get in touch</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer - Minimal -->
+    <footer class="w-full border-t border-gray-800 mt-16">
+      <div class="py-8 px-4">
+        <p class="text-gray-500 text-sm">© 2024 Daniel Richter. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <style>
+    /* Liquid Brutalism Animations */
+    .card-content {
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+    }
+
+    article:hover .card-content {
+      transform: scale(1.02) perspective(1000px) rotateX(1deg);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px) saturate(1.2);
+    }
+
+    /* Responsive Grid Adjustments */
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(8, 1fr);
+      }
+      
+      article:nth-child(1) { grid-column: span 6; }
+      article:nth-child(2) { grid-column: span 2; }
+      article:nth-child(3) { grid-column: span 2; }
+      article:nth-child(4) { grid-column: span 6; }
+      article:nth-child(5) { grid-column: span 2; }
+      article:nth-child(6) { grid-column: span 2; }
+      article:nth-child(7) { grid-column: span 2; }
+      article:nth-child(8) { grid-column: span 2; }
+      article:nth-child(9) { grid-column: span 2; }
+      article:nth-child(10) { grid-column: span 4; }
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 1px;
+      }
+      
+      article {
+        grid-column: span 1 !important;
+        min-height: 20vh;
+      }
+    }
+
+    /* Edge-to-edge adjustments */
+    main {
+      margin: 0;
+      padding: 0;
+    }
+
+    header, section, footer {
+      max-width: none;
+    }
+  </style>
+</Layout>
