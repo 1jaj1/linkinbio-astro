@@ -1,231 +1,159 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Profile from '../components/Profile/Profile.astro';
+import Card from '../components/Card/Card.astro';
+import CardBackground from '../components/Card/CardBackground.astro';
+import CardContent from '../components/Card/CardContent.astro';
+import ContentGrid from '../components/ContentGrid/ContentGrid.astro';
 ---
 
 <Layout title="Design System Test">
-  <main class="edge-container">
-    <!-- Color System Test -->
-    <section class="profile-section">
-      <h1 class="text-display font-noir-display mb-section">Noir Spectrum Color System</h1>
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-12">Design System Test</h1>
+    
+    <!-- Profile Component Test -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6">Profile Component</h2>
+      <Profile 
+        name="Jane Doe" 
+        bio="Creative designer and developer with a passion for minimalism and functionality."
+        avatar="/placeholder-avatar.jpg"
+      />
+    </section>
+
+    <!-- Card Component Test -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6">Card Components</h2>
       
-      <div class="card-grid">
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Primary Colors</h3>
-          <div class="space-y-tiny">
-                        <div class="h-8 bg-noir-primary rounded-morph"></div>
-                        <div class="h-8 bg-noir-background rounded-morph"></div>
-                        <div class="h-8 bg-noir-surface rounded-morph"></div>
-                        <div class="h-8 bg-noir-surface-hover rounded-morph"></div>
-          </div>
-        </div>
+      <!-- Basic Card -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium mb-4">Basic Card</h3>
+        <Card href="https://example.com">
+          <CardBackground />
+          <CardContent 
+            title="Basic Card" 
+            description="This is a basic card with background and content."
+          />
+        </Card>
+      </div>
 
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Accent Colors</h3>
-          <div class="space-y-tiny">
-                        <div class="h-8 bg-noir-accent-1 rounded-morph"></div>
-                        <div class="h-8 bg-noir-accent-2 rounded-morph"></div>
-                        <div class="h-8 bg-noir-accent-3 rounded-morph"></div>
-          </div>
-        </div>
+      <!-- Card with Image -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium mb-4">Card with Image Background</h3>
+        <Card href="https://example.com">
+          <CardBackground image="/placeholder-card.jpg" />
+          <CardContent 
+            title="Image Card" 
+            description="This card has an image background with overlay."
+            align="center"
+          />
+        </Card>
+      </div>
 
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Context Colors</h3>
-          <div class="space-y-tiny">
-                        <div class="h-8 bg-noir-portfolio rounded-morph"></div>
-                        <div class="h-8 bg-noir-social rounded-morph"></div>
-                        <div class="h-8 bg-noir-contact rounded-morph"></div>
-                        <div class="h-8 bg-noir-services rounded-morph"></div>
-                        <div class="h-8 bg-noir-content rounded-morph"></div>
-          </div>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Glass Effects</h3>
-          <div class="space-y-tiny">
-            <div class="h-8 glass-morph rounded-morph"></div>
-                        <div class="h-8 bg-noir-glass-overlay rounded-morph"></div>
-          </div>
-        </div>
+      <!-- Card with Gradient -->
+      <div class="mb-8">
+        <h3 class="text-lg font-medium mb-4">Card with Gradient</h3>
+        <Card href="https://example.com">
+          <CardBackground gradient="from-purple-600 to-pink-600" />
+          <CardContent 
+            title="Gradient Card" 
+            description="This card uses a custom gradient background."
+            align="center"
+          />
+        </Card>
       </div>
     </section>
 
-    <!-- Typography System Test -->
-    <section class="profile-section">
-      <h1 class="text-display font-noir-display mb-section">Brutal Hierarchy Typography</h1>
+    <!-- ContentGrid Test -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6">Content Grid</h2>
       
-      <div class="card-grid">
-        <div class="hero-card p-card">
-          <h1 class="text-display mb-tiny">Display Text</h1>
-          <p class="text-body-large">This is display text for maximum impact</p>
-        </div>
+      <h3 class="text-lg font-medium mb-4">2 Column Grid</h3>
+      <ContentGrid columns={2} gap="md" class="mb-8">
+        <Card href="https://example1.com">
+          <CardBackground gradient="from-blue-500 to-cyan-500" />
+          <CardContent 
+            title="Card 1" 
+            description="First card in 2-column grid"
+            align="center"
+          />
+        </Card>
+        <Card href="https://example2.com">
+          <CardBackground gradient="from-green-500 to-emerald-500" />
+          <CardContent 
+            title="Card 2" 
+            description="Second card in 2-column grid"
+            align="center"
+          />
+        </Card>
+      </ContentGrid>
 
-        <div class="standard-card p-card">
-          <h2 class="text-h1 mb-tiny">H1 Heading</h2>
-          <p class="text-body">This is an H1 heading with body text</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-h2 mb-tiny">H2 Heading</h3>
-          <p class="text-body">This is an H2 heading with body text</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h4 class="text-card-title mb-tiny">Card Title</h4>
-          <p class="text-card-description">This is card-specific typography</p>
-        </div>
-      </div>
-
-      <div class="feature-card p-card mt-section">
-        <h3 class="text-h2 mb-tiny">Mobile Typography</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-small">
-          <div>
-            <h1 class="text-mobile-display mb-tiny">Mobile Display</h1>
-            <p class="text-mobile-body">Mobile-optimized text sizing</p>
-          </div>
-          <div>
-            <h1 class="text-mobile-h1 mb-tiny">Mobile H1</h1>
-            <p class="text-mobile-body">Responsive typography at work</p>
-          </div>
-        </div>
-      </div>
+      <h3 class="text-lg font-medium mb-4">3 Column Grid</h3>
+      <ContentGrid columns={3} gap="lg">
+        <Card href="https://example1.com">
+          <CardBackground gradient="from-red-500 to-orange-500" />
+          <CardContent 
+            title="Card A" 
+            description="First card"
+            align="center"
+          />
+        </Card>
+        <Card href="https://example2.com">
+          <CardBackground gradient="from-yellow-500 to-amber-500" />
+          <CardContent 
+            title="Card B" 
+            description="Second card"
+            align="center"
+          />
+        </Card>
+        <Card href="https://example3.com">
+          <CardBackground gradient="from-indigo-500 to-purple-500" />
+          <CardContent 
+            title="Card C" 
+            description="Third card"
+            align="center"
+          />
+        </Card>
+      </ContentGrid>
     </section>
 
-    <!-- Spacing System Test -->
-    <section class="profile-section">
-      <h1 class="text-display font-noir-display mb-section">Micro-Dense Spacing</h1>
-      
-      <div class="card-grid">
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Spacing Scale</h3>
-          <div class="space-y-tiny">
-            <div class="h-micro bg-noir-accent-1 w-full rounded-morph"></div>
-            <div class="h-tiny bg-noir-accent-2 w-full rounded-morph"></div>
-            <div class="h-small bg-noir-accent-3 w-full rounded-morph"></div>
-            <div class="h-base bg-noir-portfolio w-full rounded-morph"></div>
-            <div class="h-medium bg-noir-social w-full rounded-morph"></div>
-            <div class="h-large bg-noir-contact w-full rounded-morph"></div>
-            <div class="h-xl bg-noir-services w-full rounded-morph"></div>
-            <div class="h-2xl bg-noir-content w-full rounded-morph"></div>
-          </div>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Gap Testing</h3>
-          <div class="micro-grid grid-cols-2">
-            <div class="h-8 bg-noir-surface rounded-morph"></div>
-            <div class="h-8 bg-noir-surface rounded-morph"></div>
-            <div class="h-8 bg-noir-surface rounded-morph"></div>
-            <div class="h-8 bg-noir-surface rounded-morph"></div>
-          </div>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Padding Testing</h3>
-          <div class="p-card bg-noir-surface rounded-morph">
-            <p class="text-card-description">Card padding applied</p>
-          </div>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Margin Testing</h3>
-          <div class="mb-section bg-noir-surface rounded-morph p-tiny">
-            <p class="text-card-description">Section margin applied</p>
-          </div>
-          <div class="bg-noir-surface rounded-morph p-tiny">
-            <p class="text-card-description">Next element</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Animation System Test -->
-    <section class="profile-section">
-      <h1 class="text-display font-noir-display mb-section">Liquid Brutalism Animations</h1>
-      
-      <div class="card-grid">
-        <div class="standard-card p-card interactive-card">
-          <h3 class="text-card-title mb-tiny">Hover Morph</h3>
-          <div class="h-16 glass-morph rounded-morph flex items-center justify-center">
-            <span class="text-card-description">Hover me</span>
-          </div>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Skeletal Loading</h3>
-          <div class="h-16 skeletal-loading rounded-morph"></div>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Image Reveal</h3>
-          <div class="h-16 bg-noir-surface image-reveal rounded-morph flex items-center justify-center">
-            <span class="text-card-description">Hover to reveal</span>
-          </div>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Text Breathe</h3>
-          <div class="h-16 bg-noir-surface rounded-morph flex items-center justify-center">
-            <span class="text-card-description text-breathe">Hover to breathe</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Responsive Behavior Test -->
-    <section class="profile-section">
-      <h1 class="text-display font-noir-display mb-section">Responsive Behavior</h1>
-      
-      <div class="card-grid">
-        <div class="hero-card p-card">
-          <h3 class="text-h2 mb-tiny">Responsive Grid</h3>
-          <p class="text-body">This card spans 2 columns on desktop, 1 on mobile</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Aspect Ratios</h3>
-          <div class="aspect-hero bg-noir-surface rounded-morph mb-tiny"></div>
-          <p class="text-card-description">Hero aspect ratio</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Standard Ratio</h3>
-          <div class="aspect-standard bg-noir-surface rounded-morph mb-tiny"></div>
-          <p class="text-card-description">1:1 aspect ratio</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title mb-tiny">Feature Ratio</h3>
-          <div class="aspect-feature bg-noir-surface rounded-morph mb-tiny"></div>
-          <p class="text-card-description">3:1 aspect ratio</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Context Color Application -->
-    <section class="profile-section">
-      <h1 class="text-display font-noir-display mb-section">Context Color Application</h1>
-      
-      <div class="card-grid">
-        <div class="standard-card p-card">
-          <h3 class="text-card-title context-portfolio mb-tiny">Portfolio</h3>
-          <p class="text-card-description">Portfolio context color</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title context-social mb-tiny">Social</h3>
-          <p class="text-card-description">Social context color</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title context-contact mb-tiny">Contact</h3>
-          <p class="text-card-description">Contact context color</p>
-        </div>
-
-        <div class="standard-card p-card">
-          <h3 class="text-card-title context-services mb-tiny">Services</h3>
-          <p class="text-card-description">Services context color</p>
-        </div>
-      </div>
+    <!-- Responsive Test -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-6">Responsive Grid Test</h2>
+      <ContentGrid columns={4} gap="md">
+        <Card href="https://example1.com">
+          <CardBackground gradient="from-rose-500 to-pink-500" />
+          <CardContent 
+            title="Responsive 1" 
+            description="Auto-responsive"
+            align="center"
+          />
+        </Card>
+        <Card href="https://example2.com">
+          <CardBackground gradient="from-fuchsia-500 to-purple-500" />
+          <CardContent 
+            title="Responsive 2" 
+            description="Auto-responsive"
+            align="center"
+          />
+        </Card>
+        <Card href="https://example3.com">
+          <CardBackground gradient="from-violet-500 to-indigo-500" />
+          <CardContent 
+            title="Responsive 3" 
+            description="Auto-responsive"
+            align="center"
+          />
+        </Card>
+        <Card href="https://example4.com">
+          <CardBackground gradient="from-blue-500 to-cyan-500" />
+          <CardContent 
+            title="Responsive 4" 
+            description="Auto-responsive"
+            align="center"
+          />
+        </Card>
+      </ContentGrid>
     </section>
   </main>
 </Layout>

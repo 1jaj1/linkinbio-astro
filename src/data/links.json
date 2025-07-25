@@ -1,0 +1,20 @@
+[
+  {
+    "title": "My Website",
+    "description": "Visit my personal website for more!",
+    "url": "https://www.example.com",
+    "image": "/images/website-thumbnail.jpg"
+  },
+  {
+    "title": "Follow me on Twitter",
+    "description": "Stay updated with my latest thoughts.",
+    "url": "https://twitter.com/example",
+    "image": "/images/twitter-thumbnail.jpg"
+  },
+  {
+    "title": "My YouTube Channel",
+    "description": "Watch my video content.",
+    "url": "https://www.youtube.com/example",
+    "image": "/images/youtube-thumbnail.jpg"
+  }
+]

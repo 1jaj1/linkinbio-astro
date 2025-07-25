@@ -1,0 +1,310 @@
+---
+export interface Props {
+  href?: string;
+  platform?: string;
+  username?: string;
+  description?: string;
+  actionText?: string;
+  backgroundImage?: string;
+  backgroundColor?: string;
+  platformColor?: string;
+  variant?: 'default' | 'large' | 'compact';
+  class?: string;
+  loading?: boolean;
+  error?: boolean;
+}
+
+const {
+  href,
+  platform,
+  username,
+  description,
+  actionText = "SEE MORE",
+  backgroundImage,
+  backgroundColor,
+  platformColor,
+  variant = 'default',
+  class: className = '',
+  loading = false,
+  error = false
+} = Astro.props;
+
+// Base card classes with responsive sizing
+const baseClasses = [
+  'relative',
+  'group',
+  'overflow-hidden',
+  'transition-all',
+  'duration-200',
+  'ease-smooth',
+  'cursor-pointer',
+  'focus-visible:outline-none',
+  'focus-visible:ring-3',
+  'focus-visible:ring-primary-500',
+  'focus-visible:ring-offset-2',
+  // Mobile sizing (240px height)
+  'h-60',
+  'rounded-card-mobile',
+  // Tablet sizing (280px height)
+  'sm:h-70',
+  'sm:rounded-card-tablet',
+  // Desktop sizing (320px height)
+  'lg:h-80',
+  'lg:rounded-card-desktop',
+  // Subtle interactive states
+  'hover:scale-100.5',
+  'hover:translate-y-[-2px]',
+  'hover:shadow-card-hover',
+  'active:scale-99',
+  'active:translate-y-0',
+  'active:duration-fast',
+  // Default shadow
+  'shadow-card'
+].join(' ');
+
+// Variant-specific classes
+const variantClasses = {
+  default: 'aspect-card-mobile sm:aspect-card-tablet lg:aspect-card-desktop',
+  large: 'aspect-card-mobile sm:aspect-card-tablet lg:aspect-[2/1]',
+  compact: 'aspect-square'
+};
+
+// State classes
+const stateClasses = [
+  loading && 'pointer-events-none opacity-70',
+  error && 'border-2 border-dashed border-error bg-error/5'
+].filter(Boolean).join(' ');
+
+const cardClasses = [
+  baseClasses,
+  variantClasses[variant],
+  stateClasses,
+  className
+].filter(Boolean).join(' ');
+
+// Background styles
+const backgroundStyle = backgroundImage 
+  ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;`
+  : backgroundColor 
+    ? `background-color: ${backgroundColor};`
+    : 'background-color: var(--card-background);';
+
+// Platform color for tags
+const platformStyle = platformColor 
+  ? `--platform-color: ${platformColor};`
+  : '';
+
+// Component tag - use 'a' if href provided, otherwise 'div'
+const Tag = href ? 'a' : 'div';
+const linkProps = href ? { href, 'data-astro-reload': true } : {};
+---
+
+<!-- 
+  Content Card Component
+  
+  Responsive card component that adapts to screen size:
+  - Mobile: 240px height, 12px border radius
+  - Tablet: 280px height, 16px border radius  
+  - Desktop: 320px height, 20px border radius
+  
+  Features:
+  - Interactive hover and focus states
+  - Platform branding and content overlay
+  - Accessibility compliant
+  - Loading and error states
+  - Optional link functionality
+-->
+
+<Tag 
+  class={cardClasses}
+  style={`${backgroundStyle} ${platformStyle}`}
+  {...linkProps}
+  role={href ? 'link' : 'article'}
+  aria-label={username ? `${platform} content by ${username}` : `${platform} content`}
+  tabindex={href ? undefined : 0}
+>
+  <!-- Background Image Overlay -->
+  <div 
+    class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-100 group-hover:opacity-80 transition-opacity duration-300"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Loading State -->
+  {loading && (
+    <div 
+      class="absolute inset-0 bg-gray-100 animate-pulse flex items-center justify-center z-10"
+      aria-label="Loading content"
+    >
+      <div class="w-6 h-6 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  )}
+
+  <!-- Error State -->
+  {error && (
+    <div 
+      class="absolute inset-0 bg-error/10 flex items-center justify-center z-10"
+      aria-label="Failed to load content"
+    >
+      <div class="text-error text-sm font-medium flex items-center gap-2">
+        <span aria-hidden="true">⚠️</span>
+        Failed to load
+      </div>
+    </div>
+  )}
+
+  <!-- Content Container -->
+  <div class="relative z-20 flex flex-col h-full p-4 sm:p-5 lg:p-6">
+    
+    <!-- Top Section: Platform Tag -->
+    {platform && (
+      <div class="flex justify-start mb-auto">
+        <span 
+          class="card-platform-tag inline-block"
+          style={platformColor ? `background-color: ${platformColor}; color: white;` : ''}
+        >
+          {platform}
+        </span>
+      </div>
+    )}
+
+    <!-- Bottom Section: Content and Action -->
+    <div class="mt-auto space-y-3 sm:space-y-4">
+      
+      <!-- Username -->
+      {username && (
+        <div class="card-username">
+          {username}
+        </div>
+      )}
+
+      <!-- Description -->
+      {description && (
+        <p class="card-description line-clamp-3 sm:line-clamp-4">
+          {description}
+        </p>
+      )}
+
+      <!-- Action Button -->
+      {actionText && (
+        <div class="flex justify-end">
+          <span 
+            class="card-action-button group-hover:scale-105 group-hover:bg-white/30 group-active:scale-95"
+            role="button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            {actionText}
+          </span>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Slot for custom content -->
+  <slot />
+</Tag>
+
+<style>
+  /* Touch device optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    .group:hover {
+      transform: none;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .group:active {
+      transform: scale(0.96);
+      transition-duration: 0.1s;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .group {
+      transition: none !important;
+    }
+    
+    .group:hover {
+      transform: none !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .card-platform-tag {
+      border: 2px solid white;
+    }
+    
+    .card-action-button {
+      border: 2px solid white;
+    }
+  }
+
+  /* Focus management for nested interactive elements */
+  .group:focus-within .card-action-button {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+  }
+
+  /* Line clamp utilities for text truncation */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Performance optimization */
+  .group {
+    /* Enable hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform, box-shadow;
+  }
+  
+  /* Remove will-change after hover */
+  .group:not(:hover):not(:focus):not(:active) {
+    will-change: auto;
+  }
+</style>
+
+<script>
+  // Enhanced accessibility and interaction handling
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('[role="article"], [role="link"]');
+    
+    cards.forEach(card => {
+      // Handle keyboard navigation for non-link cards
+      if (card.getAttribute('role') === 'article') {
+        card.addEventListener('keydown', (e: Event) => {
+          const keyboardEvent = e as KeyboardEvent;
+          if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
+            e.preventDefault();
+            (card as HTMLElement).click();
+          }
+        });
+      }
+      
+      // Add loading state management
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Trigger any lazy loading here
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+      
+      observer.observe(card);
+    });
+  });
+</script>

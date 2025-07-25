@@ -1,0 +1,152 @@
+{
+  "header": {
+    "title": "Daniel Richter",
+    "subtitle": "All the Links"
+  },
+  "information": {
+    "title": "Information",
+    "description": "Daniel Richter is a systems strategist and principled nonconformist. After leaving a senior career in digital strategy, he now engineers effective, independent systems for work and life. He shares his incisive frameworks and documented experiments to empower other independent builders seeking principled autonomy.",
+    "cards": [
+      {
+        "type": "image",
+        "background": {
+          "imageUrl": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+          "backgroundColor": "#F5A623"
+        },
+        "textStyling": {
+          "useCustomColors": false
+        },
+        "content": {
+          "username": "@testingthetest",
+          "description": "A test video for testing purposes.\n",
+          "url": "https://youtube.com/watch?v=dQw4w9WgXcQ"
+        },
+        "action": {
+          "text": "WATCH NOW",
+          "styling": {
+            "backgroundColor": "#ff0000",
+            "textColor": "#ffffff",
+            "hoverBackgroundColor": "#cc0000"
+          }
+        },
+        "taxonomy": {
+          "category": "Recent",
+          "tags": [
+            "test",
+            "video"
+          ]
+        }
+      },
+      {
+        "type": "image",
+        "background": {
+          "imageUrl": "https://pbs.twimg.com/media/GQqQQQQQQQQQQQQQQQQ.jpg"
+        },
+        "textStyling": {
+          "useCustomColors": false
+        },
+        "content": {
+          "username": "@testingthetest",
+          "description": "Hello again\n",
+          "url": "https://twitter.com/testingthetest"
+        },
+        "action": {
+          "text": "SEE MORE",
+          "styling": {
+            "backgroundColor": "#000000",
+            "textColor": "#ffffff",
+            "hoverBackgroundColor": "#333333"
+          }
+        },
+        "taxonomy": {
+          "category": "Featured",
+          "tags": [
+            "test",
+            "account"
+          ]
+        }
+      },
+      {
+        "type": "gradient",
+        "background": {
+          "startColor": "#ff0000",
+          "endColor": "#0000ff",
+          "middleColor": "#00ff00"
+        },
+        "textStyling": {
+          "useCustomColors": true,
+          "primaryTextColor": "#ffffff",
+          "secondaryTextColor": "#cccccc"
+        },
+        "content": {
+          "username": "@testingthetest",
+          "description": "A test gradient for testing purposes.\n",
+          "url": "https://example.com"
+        },
+        "action": {
+          "text": "EXPLORE",
+          "styling": {
+            "backgroundColor": "#ffffff",
+            "textColor": "#000000",
+            "hoverBackgroundColor": "#eeeeee"
+          }
+        },
+        "taxonomy": {
+          "category": "Showcase",
+          "tags": [
+            "test",
+            "gradient"
+          ]
+        }
+      },
+      {
+        "type": "solid",
+        "background": {
+          "backgroundColor": "#000000"
+        },
+        "textStyling": {
+          "useCustomColors": true,
+          "primaryTextColor": "#ffffff",
+          "secondaryTextColor": "#cccccc"
+        },
+        "content": {
+          "username": "@testingthetest",
+          "description": "A test solid color for testing purposes.\n",
+          "url": "https://example.com"
+        },
+        "action": {
+          "text": "LEARN MORE",
+          "styling": {
+            "backgroundColor": "#ffffff",
+            "textColor": "#000000",
+            "hoverBackgroundColor": "#eeeeee"
+          }
+        },
+        "taxonomy": {
+          "category": "Tutorial",
+          "tags": [
+            "test",
+            "solid"
+          ]
+        }
+      }
+    ]
+  },
+  "footer": {
+    "attribution": "made with ❤️ by urc.media",
+    "attributionUrl": "https://www.urc.media",
+    "styling": {
+      "textColor": "#666666",
+      "fontSize": 0.875
+    }
+  },
+  "seo": {
+    "title": "Link in Bio - Testing The Test",
+    "description": "All the links you need in one place for Testing The Test",
+    "keywords": [
+      "link in bio",
+      "testing",
+      "test account"
+    ]
+  }
+}

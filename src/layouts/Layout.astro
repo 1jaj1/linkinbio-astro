@@ -1,47 +1,30 @@
 ---
-export interface Props {
-  title: string;
-  description?: string;
-  image?: string;
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
 }
 
-const { 
-  title, 
-  description = "Your personal link-in-bio page", 
-  image = "/images/og-image.jpg" 
-} = Astro.props;
+const { title, description = "Link in Bio - Daniel Richter" } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
-    
-    <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body class="bg-gray-50 min-h-screen">
-    <main>
-      <slot />
-    </main>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		
+		<!-- Preload Cairo font for better performance -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	</head>
+	<body class="min-h-screen bg-gray-200 font-primary text-gray-900 antialiased">
+		<slot />
+	</body>
 </html>
-
-<style>
-  @import '../styles/global.css';
-</style>

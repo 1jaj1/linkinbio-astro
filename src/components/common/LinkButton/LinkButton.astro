@@ -1,0 +1,104 @@
+---
+// src/components/LinkButton/LinkButton.astro
+
+/**
+ * LinkButton Component Props
+ */
+interface LinkButtonProps {
+  /** The text to display on the button */
+  text?: string;
+  /** The URL to link to */
+  href?: string;
+  /** The button variant */
+  variant?: 'primary' | 'secondary' | 'ghost';
+  /** ARIA label for accessibility */
+  ariaLabel?: string;
+  /** Optional icon (default is right arrow for "SEE MORE") */
+  icon?: string;
+  /** Whether the link is external (opens in new tab) */
+  isExternal?: boolean;
+  /** Additional class names */
+  className?: string;
+}
+
+// Default props
+const {
+  text = 'SEE MORE',
+  href = '#',
+  variant = 'primary',
+  ariaLabel,
+  icon = '→',
+  isExternal = false,
+  className = '',
+  ...restProps
+} = Astro.props as LinkButtonProps;
+
+// Base styles for all variants
+const baseStyles = `
+  inline-flex items-center justify-center
+  text-sm font-medium
+  transition-all duration-250 ease-in-out
+  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+  disabled:opacity-50 disabled:cursor-not-allowed
+  min-h-[44px] min-w-[44px] px-4 py-2
+`;
+
+// Variant styles
+const variantStyles = {
+  primary: `
+    bg-white/90 backdrop-blur-md border border-white/30
+    text-gray-900 hover:bg-white hover:border-white/50
+    focus-visible:ring-white/80
+    dark:bg-gray-800/90 dark:text-white dark:border-gray-700
+    dark:hover:bg-gray-700 dark:focus-visible:ring-gray-500
+  `,
+  secondary: `
+    bg-gray-600/80 backdrop-blur-md border border-gray-500/50
+    text-white hover:bg-gray-500/80
+    focus-visible:ring-gray-400
+    dark:bg-gray-700/80 dark:border-gray-600/50
+    dark:hover:bg-gray-600/80 dark:focus-visible:ring-gray-500
+  `,
+  ghost: `
+    bg-transparent border border-transparent
+    text-white hover:bg-white/10
+    focus-visible:ring-white/80
+    dark:text-gray-300 dark:hover:bg-gray-700/50
+    dark:focus-visible:ring-gray-500
+  `
+};
+
+// Combine all styles
+const buttonClasses = `${baseStyles} ${variantStyles[variant]} ${className}`.trim();
+---
+
+<a
+  href={href}
+  class={buttonClasses}
+  aria-label={ariaLabel || text}
+  {...(isExternal && {
+    target: '_blank',
+    rel: 'noopener noreferrer'
+  })}
+  {...restProps}
+>
+  {text}
+  {icon && <span class="ml-2" aria-hidden="true">{icon}</span>}
+</a>
+
+<style>
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .transition-all {
+    transition: none !important;
+  }
+}
+
+/* Touch target expansion for accessibility */
+.card-action-button::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  z-index: -1;
+}
+</style>

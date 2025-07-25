@@ -1,0 +1,162 @@
+---
+interface Props {
+  cards?: Array<{
+    type: string;
+    background: any;
+    textStyling: any;
+    content: {
+      username: string;
+      description: string;
+      url: string;
+    };
+    action: {
+      text: string;
+      styling: any;
+    };
+    taxonomy: {
+      category: string;
+      tags: string[];
+    };
+  }>;
+}
+
+const { cards = [] } = Astro.props;
+
+// Generate background style based on card type
+function getBackgroundStyle(card: any) {
+  switch (card.type) {
+    case 'gradient':
+      if (card.background.middleColor) {
+        return `background: linear-gradient(135deg, ${card.background.startColor} 0%, ${card.background.middleColor} 50%, ${card.background.endColor} 100%);`;
+      }
+      return `background: linear-gradient(135deg, ${card.background.startColor} 0%, ${card.background.endColor} 100%);`;
+    case 'solid':
+      return `background: ${card.background.backgroundColor};`;
+    case 'image':
+      return `background-image: url('${card.background.imageUrl}'); background-size: cover; background-position: center;`;
+    case 'video':
+      if (card.background.videoUrl) {
+        return `position: relative; overflow: hidden;`;
+      }
+      return `background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);`;
+    default:
+      return `background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);`;
+  }
+}
+
+// Get text colors based on styling
+function getTextColors(card: any) {
+  if (card.textStyling.useCustomColors) {
+    return {
+      primary: card.textStyling.primaryTextColor || '#ffffff',
+      secondary: card.textStyling.secondaryTextColor || '#cccccc'
+    };
+  }
+  return {
+    primary: '#ffffff',
+    secondary: '#cccccc'
+  };
+}
+---
+
+<!-- Content Grid Container with proper background -->
+<div class="w-full bg-gray-200 py-8 px-4">
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Responsive Grid Layout -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
+      {cards.map((card) => {
+        const textColors = getTextColors(card);
+        return (
+          <a
+            href={card.content.url}
+            class="group block relative w-full aspect-[337/432] rounded-lg shadow-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-sm-hover"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            
+            <!-- Background -->
+            {card.type === 'video' && card.background.videoUrl ? (
+              <video
+                class="absolute inset-0 w-full h-full object-cover"
+                autoplay
+                muted
+                loop
+                playsinline
+                src={card.background.videoUrl}
+              />
+            ) : (
+              <div
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={getBackgroundStyle(card)}
+              />
+            )}
+            
+            <!-- Card Content -->
+            <div class="relative h-full flex flex-col justify-between p-6 gap-2.5">
+              
+              <!-- Tags Section -->
+              <div class="flex justify-between items-start w-full gap-2.5 flex-wrap">
+                
+                <!-- Category Tag -->
+                <div class="flex flex-col justify-center items-center gap-1 px-3 py-2 rounded-full
+                           bg-white/10 border border-white/20 shadow-sm backdrop-blur-md
+                           hover:bg-white/15 hover:border-white/30 transition-all duration-300
+                           hover:shadow-lg hover:shadow-white/10">
+                  <span class="text-xs text-white uppercase font-primary font-medium whitespace-nowrap">
+                    {card.taxonomy.category}
+                  </span>
+                </div>
+                
+                <!-- CTA Tag -->
+                <div class="flex flex-col justify-center items-center gap-1 px-3 py-2 rounded-full
+                           bg-white/10 border border-white/20 shadow-sm backdrop-blur-md
+                           hover:bg-white/15 hover:border-white/30 transition-all duration-300
+                           hover:shadow-lg hover:shadow-white/10">
+                  <span class="text-xs text-white uppercase font-primary font-medium whitespace-nowrap">
+                    {card.action.text}
+                  </span>
+                </div>
+                
+              </div>
+              
+              <!-- Info Section -->
+              <div class="flex flex-col justify-end w-full gap-4 mt-auto">
+                
+                <!-- Username -->
+                <h3 
+                  class="text-xl font-primary lowercase leading-tight w-full break-words"
+                  style={`color: ${textColors.primary};`}
+                >
+                  {card.content.username}
+                </h3>
+                
+                <!-- Description -->
+                <p 
+                  class="text-sm font-primary lowercase leading-relaxed w-full break-words line-clamp-3"
+                  style={`color: ${textColors.secondary};`}
+                >
+                  {card.content.description}
+                </p>
+                
+              </div>
+              
+            </div>
+            
+            <!-- Hover Overlay -->
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-all duration-200"></div>
+            
+          </a>
+        );
+      })}
+    </div>
+    
+    <!-- Empty State -->
+    {cards.length === 0 && (
+      <div class="text-center py-16">
+        <p class="text-gray-500 text-lg">No content available</p>
+      </div>
+    )}
+    
+  </div>
+</div>
